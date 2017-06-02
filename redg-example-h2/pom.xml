@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>redg-examples</artifactId>
+        <groupId>com.btc-ag.redg</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>redg-example-h2</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.btc-ag.redg</groupId>
+            <artifactId>redg-runtime</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.195</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.btc-ag.redg</groupId>
+                <artifactId>redg-maven-plugin</artifactId>
+
+                <executions>
+                    <execution>
+                        <id>redg-generate</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>redg</goal>
+                        </goals>
+                        <configuration>
+                            <jdbcDriver>org.h2.Driver</jdbcDriver>
+                            <connectionString>jdbc:h2:file:./database</connectionString>
+                            <sqlScripts>
+                                <sqlScript>src/test/resources/schema.sql</sqlScript> <!-- the sql file with your schema ddl -->
+                            </sqlScripts>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>

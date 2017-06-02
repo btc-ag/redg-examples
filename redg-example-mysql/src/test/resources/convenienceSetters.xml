@@ -1,0 +1,6 @@
+<convenienceSetterConfig>
+    <javaType name="java.sql.Timestamp">
+        <convenienceSetter setterJavaTypeName="java.lang.String" fullyQualifiedConverterMethodName="com.btc.redg.runtime.util.DateConverter.convertDate"/>
+        <convenienceSetter setterJavaTypeName="java.time.ZonedDateTime" fullyQualifiedConverterMethodName="com.btc.redg.example.mysql.util.ZonedDateTimeToTimestampConverter.convertDate"/>
+    </javaType>
+</convenienceSetterConfig>

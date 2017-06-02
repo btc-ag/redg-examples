@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>redg-examples</artifactId>
+        <groupId>com.btc-ag.redg</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>redg-example-mysql</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.btc-ag.redg</groupId>
+            <artifactId>redg-runtime</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+
+        <!--
+         This library is licensed under GPL, but Oracle has a FOSS License Exception
+         https://www.mysql.com/about/legal/licensing/foss-exception/
+         -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>6.0.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.btc-ag.redg</groupId>
+                <artifactId>redg-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>redg-generate</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>redg</goal>
+                        </goals>
+                        <configuration>
+                            <jdbcDriver>com.mysql.cj.jdbc.Driver</jdbcDriver>
+                            <!--
+                            connection string with extra parameters. Change timezone to your server's timezone.
+                            See https://dev.mysql.com/doc/connector-j/6.0/en/connector-j-reference-configuration-properties.html for all options
+                            nullNamePatternMatchesAll=true is required for MySQL databases
+                            -->
+                            <connectionString>jdbc:mysql://localhost/redg?useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Berlin&amp;nullNamePatternMatchesAll=true</connectionString>
+
+                            <!--
+                            Username and password are defined in settings.xml in user home.
+                            See https://maven.apache.org/examples/injecting-properties-via-settings.html or simply insert your credentials
+                            when you do not publish this file and are the only one with access to it
+                            -->
+                            <username>${mysqlUser}</username>
+                            <password>${mysqlPass}</password>
+
+                            <convenienceSetterConfig>src/test/resources/convenienceSetters.xml</convenienceSetterConfig>
+                            <schemaRegex>redg</schemaRegex>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <!-- IMPORTANT: Add driver as plugin dependency as well-->
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>6.0.6</version>
+                    </dependency>
+                    <!-- add schemacrawler add-on -->
+                    <dependency>
+                        <groupId>us.fatehi</groupId>
+                        <artifactId>schemacrawler-mysql</artifactId>
+                        <version>14.10.06</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
