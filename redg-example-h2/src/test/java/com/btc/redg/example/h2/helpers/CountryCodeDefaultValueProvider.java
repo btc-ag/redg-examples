@@ -1,15 +1,16 @@
 package com.btc.redg.example.h2.helpers;
 
+import com.btc.redg.models.ColumnModel;
 import com.btc.redg.runtime.defaultvalues.pluggable.PluggableDefaultValueProvider;
 
 public class CountryCodeDefaultValueProvider implements PluggableDefaultValueProvider {
     @Override
-    public boolean willProvide(final String fullTableName, final String tableName, final String columnName, final Class<?> type, final boolean nullable) {
-        return String.class.isAssignableFrom(type);
+    public boolean willProvide(final ColumnModel columnModel) {
+        return String.class.isAssignableFrom(columnModel.getJavaTypeAsClass());
     }
 
     @Override
-    public <T> T getDefaultValue(final String fullTableName, final String tableName, final String columnName, final Class<T> type, final boolean nullable) {
+    public <T> T getDefaultValue(final ColumnModel columnModel, final Class<T> type) {
         return type.cast(COUNTRY_CODES[(int) (COUNTRY_CODES.length * Math.random())]);
     }
 

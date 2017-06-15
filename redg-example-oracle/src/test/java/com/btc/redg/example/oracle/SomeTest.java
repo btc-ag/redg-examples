@@ -59,8 +59,7 @@ public class SomeTest {
                 .firstName("Max")
                 .lastName("Mustermann")
                 .studentId(1337L); // Due to custom mappings the id is a long and not BigDecimal.
-        redG.
-        RedG redG1 = new RedG();
+
         redG.insertDataIntoDatabase(connection);
 
     }

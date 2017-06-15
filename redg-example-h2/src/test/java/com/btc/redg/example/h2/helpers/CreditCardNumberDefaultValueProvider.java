@@ -1,5 +1,6 @@
 package com.btc.redg.example.h2.helpers;
 
+import com.btc.redg.models.ColumnModel;
 import com.btc.redg.runtime.defaultvalues.pluggable.NumberProvider;
 
 import java.math.BigDecimal;
@@ -7,8 +8,8 @@ import java.math.BigDecimal;
 public class CreditCardNumberDefaultValueProvider extends NumberProvider {
 
     @Override
-    public <T> T getDefaultValue(final String fullTableName, final String tableName, final String columnName, final Class<T> aClass, final boolean nullable) {
-        return super.convertNumber(getRandomCreditCardNumber(), aClass);
+    public <T> T getDefaultValue(final ColumnModel columnModel, final Class<T> aClass) {
+        return convertNumber(getRandomCreditCardNumber(), aClass);
     }
 
     /**
