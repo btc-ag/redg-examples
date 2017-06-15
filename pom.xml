@@ -16,7 +16,7 @@
     </modules>
 
     <properties>
-        <redGVersion>1.0.17</redGVersion>
+        <redGVersion>1.0.18-SNAPSHOT</redGVersion>
         <jUnitVersion>4.12</jUnitVersion>
         <logbackVersion>1.1.8</logbackVersion>
 

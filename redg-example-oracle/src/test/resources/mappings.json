@@ -1,12 +1,5 @@
 {
-  "REDGDEMO.STUDENT": {
-    "STUDENT_ID": "java.lang.Long"
-  },
-  "REDGDEMO.CLASS": {
-    "CLASS_ID": "java.lang.Long"
-  },
-  "REDGDEMO.STUDENTS_IN_CLASSES": {
-    "CLASS_ID": "java.lang.Long",
-    "STUDENT_ID": "java.lang.Long"
+  "defaultTypeMappings": {
+    "NUMBER": "java.lang.Long"
   }
 }

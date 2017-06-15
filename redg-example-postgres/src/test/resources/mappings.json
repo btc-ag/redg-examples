@@ -1,8 +1,10 @@
 {
-  "redg.patient": {
-    "date_of_birth": "java.time.ZonedDateTime"
-  },
-  "redg.appointment": {
-    "\"time\"": "java.time.ZonedDateTime"
+  "tableMappings": {
+    "redg.patient": {
+      "date_of_birth": "java.time.ZonedDateTime"
+    },
+    "redg.appointment": {
+      "\"time\"": "java.time.ZonedDateTime"
+    }
   }
 }
