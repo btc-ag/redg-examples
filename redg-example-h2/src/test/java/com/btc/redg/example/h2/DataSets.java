@@ -5,6 +5,7 @@ import com.btc.redg.example.h2.helpers.CreditCardNumberDefaultValueProvider;
 import com.btc.redg.generated.GCreditCard;
 import com.btc.redg.generated.RedG;
 import com.btc.redg.runtime.AbstractRedG;
+import com.btc.redg.runtime.RedGBuilder;
 import com.btc.redg.runtime.defaultvalues.pluggable.DefaultDefaultValueProvider;
 import com.btc.redg.runtime.defaultvalues.pluggable.IncrementingNumberProvider;
 import com.btc.redg.runtime.defaultvalues.pluggable.PluggableDefaultValueStrategy;
@@ -20,7 +21,6 @@ public class DataSets {
     public static AbstractRedG getNameTestDataSet() {
         // The data set for a test that checks whether name of customer equals credit card holder.
         // Only customer and a credit card are relevant
-        RedG redG = new RedG();
 
         PluggableDefaultValueStrategy strategy = new PluggableDefaultValueStrategy.Builder()
                 .use(new CreditCardNumberDefaultValueProvider())
@@ -31,7 +31,9 @@ public class DataSets {
                     .when(columnName(contains("_ID")))
                 .useDefault()
                 .build();
-        redG.setDefaultValueStrategy(strategy);
+        RedG redG = new RedGBuilder<RedG>()
+                .withDefaultValueStrategy(strategy)
+                .build();
 
         for (int i = 0; i < 15; i++) {
             String firstName = FIRST_NAMES[(int) (FIRST_NAMES.length * Math.random())];

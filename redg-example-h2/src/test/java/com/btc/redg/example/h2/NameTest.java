@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class NameTest {
 
@@ -41,5 +42,13 @@ public class NameTest {
             LOG.info("Comparing customer {} {} with card holder {}", firstName, lastName, holderName);
             assertEquals(firstName + " " + lastName, holderName);
         }
+    }
+
+    @Test
+    public void testVisualization() throws Exception {
+        LOG.info("testing visualization...");
+        final String vis = DataSets.getNameTestDataSet().getVisualizationJson();
+        assertNotNull(vis);
+        LOG.info(vis);
     }
 }

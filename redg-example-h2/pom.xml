@@ -30,6 +30,18 @@
             <version>1.4.195</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.8.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.8.5</version>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -56,6 +68,7 @@
                             <sqlScripts>
                                 <sqlScript>src/test/resources/schema.sql</sqlScript> <!-- the sql file with your schema ddl -->
                             </sqlScripts>
+                            <enableVisualizationSupport>true</enableVisualizationSupport>
                         </configuration>
                     </execution>
                 </executions>
