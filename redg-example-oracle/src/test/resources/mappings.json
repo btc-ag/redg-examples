@@ -1,5 +1,6 @@
 {
   "defaultTypeMappings": {
-    "NUMBER": "java.lang.Long"
+    "NUMBER": "java.lang.Long",
+    "NUMBER(1)": "java.lang.Boolean"
   }
 }

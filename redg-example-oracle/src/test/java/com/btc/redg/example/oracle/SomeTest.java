@@ -3,7 +3,9 @@ package com.btc.redg.example.oracle;
 import com.btc.redg.generated.GClass;
 import com.btc.redg.generated.GStudent;
 import com.btc.redg.generated.RedG;
-import com.btc.redg.runtime.defaultvalues.pluggable.*;
+import com.btc.redg.runtime.defaultvalues.pluggable.IncrementingNumberProvider;
+import com.btc.redg.runtime.defaultvalues.pluggable.PluggableDefaultValueStrategy;
+import com.btc.redg.runtime.defaultvalues.pluggable.StaticDateProvider;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -31,7 +33,7 @@ public class SomeTest {
         Class.forName("oracle.jdbc.OracleDriver");
         // Insert your username/password here
         // DO NOT USE PRODUCTION CREDENTIALS OR PUBLISH THESE ANYWHERE. These are examples, not best-practice approaches!
-        connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "user", "password");
+        connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "oracle");
         Statement statement = connection.createStatement();
         statement.execute("DELETE FROM REDGDEMO.STUDENTS_IN_CLASSES");
         statement.execute("DELETE FROM REDGDEMO.STUDENT");
@@ -48,16 +50,18 @@ public class SomeTest {
 
         List<GStudent> students = IntStream.range(1, 11).mapToObj(num -> redG.addStudent()
                 .firstName("Mark")
-                .lastName("Johnson the " + num + ".")).collect(Collectors.toList());
+                .lastName("Johnson the " + num + ".")
+                .needsStudentAid(Math.random() > 0.3)).collect(Collectors.toList());
         List<GClass> classes = IntStream.range(1, 4).mapToObj(num -> redG.addClass()
                 .name("Class " + num)).collect(Collectors.toList());
         students.forEach(s ->
-            classes.forEach(s::addStudentsInClassesRelation)
+                classes.forEach(s::addStudentsInClassesRelation)
         );
 
         redG.addStudent()
                 .firstName("Max")
                 .lastName("Mustermann")
+                .needsStudentAid(false) // Due to custom mappings this is a boolean and not BigDecimal.
                 .studentId(1337L); // Due to custom mappings the id is a long and not BigDecimal.
 
         redG.insertDataIntoDatabase(connection);
