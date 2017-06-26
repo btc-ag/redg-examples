@@ -1,4 +1,4 @@
-// This is the RedG demo schema for H2 databases. Its use is to demonstrate features of RedG, it is not necessary a good schema you should use
+-- This is the RedG demo schema for H2 databases. Its use is to demonstrate features of RedG, it is not necessary a good schema you should use
 
 DROP TABLE IF EXISTS CUSTOMER;
 DROP TABLE IF EXISTS CREDIT_CARD;
@@ -31,7 +31,7 @@ CREATE TABLE BANK_INSTITUTE (
   BANK_NAME VARCHAR2(50 CHAR) NOT NULL,
 
   ADDRESS   NUMBER(15)        NOT NULL,
-  //yes, this is somewhat redundant. But simply imagine a Bank that serves customers only in Germany but has its headquarters in Denmark
+  -- yes, this is somewhat redundant. But simply imagine a Bank that serves customers only in Germany but has its headquarters in Denmark
   COUNTRY   VARCHAR2(3 CHAR)  NOT NULL,
 
   CONSTRAINT FK_BANK_INSTITUTE_ADDRESS FOREIGN KEY (ADDRESS) REFERENCES ADDRESS (ADDRESS_ID),
