@@ -24,7 +24,7 @@ public class DataSets {
 
         PluggableDefaultValueStrategy strategy = new PluggableDefaultValueStrategy.Builder()
                 .use(new CreditCardNumberDefaultValueProvider())
-                    .when(allOf(tableName(eq("CREDIT_CARD")), columnName(eq("CARD_NUMBER"))))
+                    .when(tableName(eq("CREDIT_CARD")).and(columnName(eq("CARD_NUMBER"))))
                 .use(new CountryCodeDefaultValueProvider())
                     .when(columnName(eq("COUNTRY_CODE")))
                 .use(new IncrementingNumberProvider())
