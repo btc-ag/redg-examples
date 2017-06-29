@@ -12,4 +12,56 @@
     <artifactId>redg-example-data-extraction</artifactId>
 
 
+    <dependencies>
+        <dependency>
+            <groupId>com.btc-ag.redg</groupId>
+            <artifactId>redg-runtime</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.btc-ag.redg</groupId>
+            <artifactId>redg-extractor</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.195</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.btc-ag.redg</groupId>
+                <artifactId>redg-maven-plugin</artifactId>
+
+                <executions>
+                    <execution>
+                        <id>redg-generate</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>redg</goal>
+                        </goals>
+                        <configuration>
+                            <jdbcDriver>org.h2.Driver</jdbcDriver>
+                            <connectionString>jdbc:h2:file:./database</connectionString>
+                            <sqlScripts>
+                                <sqlScript>src/main/resources/cleanup.sql</sqlScript>
+                                <sqlScript>src/main/resources/schema.sql</sqlScript> <!-- the sql file with your schema ddl -->
+                                <sqlScript>src/main/resources/data.sql</sqlScript>
+                            </sqlScripts>
+                            <outputDirectory>target/generated-sources/redg</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

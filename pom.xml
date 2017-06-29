@@ -32,6 +32,11 @@
                 <artifactId>redg-runtime</artifactId>
                 <version>${redGVersion}</version>
             </dependency>
+            <dependency>
+                <groupId>com.btc-ag.redg</groupId>
+                <artifactId>redg-extractor</artifactId>
+                <version>${redGVersion}</version>
+            </dependency>
 
             <dependency>
                 <groupId>junit</groupId>
