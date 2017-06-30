@@ -3,6 +3,7 @@ package com.btc.redg.example.dataextraction;
 import com.btc.redg.extractor.CodeGenerator;
 import com.btc.redg.extractor.DataExtractor;
 import com.btc.redg.extractor.filter.TransitiveEntityFilter;
+import com.btc.redg.extractor.generationmodes.EntityInclusionMode;
 import com.btc.redg.extractor.model.EntityModel;
 import com.btc.redg.extractor.tablemodelextractor.TableModelExtractor;
 import com.btc.redg.generated.*;
@@ -91,10 +92,12 @@ public class DataExtraction {
 
         LOG.info("Extracting filtered data from database...");
         DataExtractor extractor = new DataExtractor();
-        extractor.setEntityFilter(new TransitiveEntityFilter(
-                e -> !e.getTableModel().getSqlName().equals("ADDRESS")
-                        || e.getValues().get("city") == null
-                        || !e.getValues().get("city").getValue().equals("\"Pasadena\"")));
+        extractor.setEntityModeDecider(entityModel -> {
+            if (entityModel.getTableModel().getSqlName().equals("ADDRESS")) {
+                return EntityInclusionMode.USE_EXISTING;
+            }
+            return EntityInclusionMode.ADD_NEW;
+        });
 
         List<EntityModel> entityModels = extractor.extractAllData(connection, tableModels);
         LOG.info("Extraction done.");
