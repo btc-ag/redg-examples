@@ -64,7 +64,7 @@
                         </goals>
                         <configuration>
                             <jdbcDriver>org.h2.Driver</jdbcDriver>
-                            <connectionString>jdbc:h2:file:./database</connectionString>
+                            <connectionString>jdbc:h2:file:${project.basedir}/database</connectionString>
                             <sqlScripts>
                                 <sqlScript>src/test/resources/schema.sql</sqlScript> <!-- the sql file with your schema ddl -->
                             </sqlScripts>
