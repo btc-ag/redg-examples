@@ -9,38 +9,23 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>redg-example-h2</artifactId>
+    <artifactId>redg-example-data-extraction</artifactId>
+
 
     <dependencies>
         <dependency>
             <groupId>com.btc-ag.redg</groupId>
             <artifactId>redg-runtime</artifactId>
-            <scope>test</scope>
         </dependency>
-
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
+            <groupId>com.btc-ag.redg</groupId>
+            <artifactId>redg-extractor</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.195</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>2.8.5</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.8.5</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -48,6 +33,7 @@
             <artifactId>logback-classic</artifactId>
         </dependency>
     </dependencies>
+
 
     <build>
         <plugins>
@@ -58,7 +44,7 @@
                 <executions>
                     <execution>
                         <id>redg-generate</id>
-                        <phase>generate-test-sources</phase>
+                        <phase>generate-sources</phase>
                         <goals>
                             <goal>redg</goal>
                         </goals>
@@ -66,15 +52,16 @@
                             <jdbcDriver>org.h2.Driver</jdbcDriver>
                             <connectionString>jdbc:h2:file:${project.basedir}/database</connectionString>
                             <sqlScripts>
-                                <sqlScript>src/test/resources/schema.sql</sqlScript> <!-- the sql file with your schema ddl -->
+                                <sqlScript>src/main/resources/cleanup.sql</sqlScript>
+                                <sqlScript>src/main/resources/schema.sql</sqlScript> <!-- the sql file with your schema ddl -->
+                                <sqlScript>src/main/resources/data.sql</sqlScript>
                             </sqlScripts>
-                            <enableVisualizationSupport>true</enableVisualizationSupport>
+                            <outputDirectory>target/generated-sources/redg</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
-
 
 </project>
