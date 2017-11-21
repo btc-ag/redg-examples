@@ -3,6 +3,8 @@ package com.btc.redg.example.oracle;
 import com.btc.redg.generated.GClass;
 import com.btc.redg.generated.GStudent;
 import com.btc.redg.generated.RedG;
+import com.btc.redg.runtime.defaultvalues.DefaultDefaultValueStrategy;
+import com.btc.redg.runtime.defaultvalues.DefaultValueStrategyBuilder;
 import com.btc.redg.runtime.defaultvalues.pluggable.IncrementingNumberProvider;
 import com.btc.redg.runtime.defaultvalues.pluggable.PluggableDefaultValueStrategy;
 import com.btc.redg.runtime.defaultvalues.pluggable.StaticDateProvider;
@@ -41,12 +43,11 @@ public class SomeTest {
 
         RedG redG = new RedG();
 
-        PluggableDefaultValueStrategy strategy = new PluggableDefaultValueStrategy.Builder()
-                .use(new IncrementingNumberProvider())
-                .use(new StaticDateProvider(new Date(1072273332000L)))
-                .useDefault()
-                .build();
-        redG.setDefaultValueStrategy(strategy);
+        DefaultValueStrategyBuilder builder = new DefaultValueStrategyBuilder();
+        builder.when(c -> true).thenUseProvider(new IncrementingNumberProvider());
+        builder.when(c -> true).thenUseProvider(new StaticDateProvider(new Date(1072273332000L)));
+        builder.setFallbackStrategy(new DefaultDefaultValueStrategy());
+        redG.setDefaultValueStrategy(builder.build());
 
         List<GStudent> students = IntStream.range(1, 11).mapToObj(num -> redG.addStudent()
                 .firstName("Mark")
