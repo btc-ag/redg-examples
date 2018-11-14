@@ -56,8 +56,8 @@
                             See https://maven.apache.org/examples/injecting-properties-via-settings.html or simply insert your credentials
                             when you do not publish this file and are the only one with access to it
                             -->
-                            <username>${postgresUser}</username>
-                            <password>${postgresPass}</password>
+                            <username>redg</username>
+                            <password>redg</password>
 
                             <customTypeMappings>src/test/resources/mappings.json</customTypeMappings>
                             <schemaRegex>redg</schemaRegex>
@@ -75,7 +75,7 @@
                     <dependency>
                         <groupId>us.fatehi</groupId>
                         <artifactId>schemacrawler-postgresql</artifactId>
-                        <version>14.10.06</version>
+                        <version>15.01.06</version>
                     </dependency>
                 </dependencies>
             </plugin>

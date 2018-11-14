@@ -30,7 +30,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>6.0.6</version>
+            <version>8.0.12</version>
         </dependency>
 
         <dependency>
@@ -78,13 +78,13 @@
                     <dependency>
                         <groupId>mysql</groupId>
                         <artifactId>mysql-connector-java</artifactId>
-                        <version>6.0.6</version>
+                        <version>8.0.12</version>
                     </dependency>
                     <!-- add schemacrawler add-on -->
                     <dependency>
                         <groupId>us.fatehi</groupId>
                         <artifactId>schemacrawler-mysql</artifactId>
-                        <version>14.10.06</version>
+                        <version>15.01.06</version>
                     </dependency>
                 </dependencies>
             </plugin>

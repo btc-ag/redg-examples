@@ -4,7 +4,7 @@
       "date_of_birth": "java.time.ZonedDateTime"
     },
     "redg.appointment": {
-      "\"time\"": "java.time.ZonedDateTime"
+      "time": "java.time.ZonedDateTime"
     }
   }
 }
